@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Application</title>
+</head>
+<body>
+    <% if (typeof errors !== 'undefined') { %>
+        <% errors.forEach(error => { %>
+            <p style="color: red;"> <%= error.msg  %></p>
+        <% }) %>
+    <% } %>
+    <h1><%= category.title %></h1>
+    <p><%= category.description %></p>
+    <h3>Items under this category: </h3>
+    <% items.forEach(item => { %>
+        <a href="<%= item.url %>"><%= item.name %></a><br>
+    <% }) %>
+    <a href="/catalog/category/<%= category._id %>/update">Edit Category</a>
+    <a href="/catalog/category/<%= category._id %>/delete">Delete Category</a>
+    <a href="/catalog/item/create">Add Item</a>
+    <a href="/">Back To Home</a>
+</body>
+</html>

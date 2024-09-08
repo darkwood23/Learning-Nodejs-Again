@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Application</title>
+</head>
+<body>
+    <% if (typeof errors !== 'undefined') { %>
+        <% errors.forEach(error => { %>
+            <p style="color: red;"> <%= error.msg  %></p>
+        <% }); %>
+    <% } %>
+    <h1>Inventory Application</h1>
+    <div class="details">
+        <h3>Some Details:</h3>
+        <h4>No. of categories: <%= numCategories %></h4>
+        <h4>No. of items: <%= numItems %></h4>
+    </div>
+    <div class="options">
+        <h3>Options: </h3>
+        <a href="/catalog/category/create">Add Category</a>
+        <a href="/catalog/item/create">Add Item</a>
+    </div>
+    <div class="categories">
+        <h2>Categories:</h2>
+        <% categories.forEach(category => { %>
+            <a href="<%= category.url %>""><%= category.title %></a>
+        <% }) %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Application</title>
+</head>
+<body>
+
+    <% if (typeof errors !== 'undefined') { %>
+        <% errors.forEach(error => { %>
+            <p style="color: red;"> <%= error.msg  %></p>
+        <% }); %>
+    <% } %> 
+    <h1><%= title %></h1>
+    <form action="" method="post">
+        <label for="name">Item Name:</label>
+        <input type="text" id="name" name="name" required value="<%= typeof item !== 'undefined' ? item.name : '' %>">
+        <br><br>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required value="<%= typeof item !== 'undefined' ? item.stock : '' %>" />
+        <br><br>
+        <label for="price">Price (per quantity):</label>
+        <input type="number" id="price" name="price" required value="<%= typeof item !== 'undefined' ? item.price : '' %>" />
+        <br><br>
+        <label for="category">Category:</label>
+        <% if (typeof item !== 'undefined') {
+            categories.forEach(category => { %>
+                <input type="checkbox" name="category[]" value="<%= category._id %>" 
+                    <% if (item.categories.some(cat => cat.equals(category._id))) { %> checked <% } %>>
+                <label><%= category.title %></label>
+            <% })
+        } else {
+            categories.forEach(category => { %>
+                <input type="checkbox" name="category[]" value="<%= category._id %>" >
+                <label><%= category.title %></label>
+            <% })
+        } %>
+        <br><br>
+        <button type="submit"><%= title %></button>
+    </form>
+
+    
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Application</title>
+</head>
+<body>
+    <% if (typeof errors !== 'undefined') { %>
+        <% errors.forEach(error => { %>
+            <p style="color: red;"> <%= error.msg  %></p>
+        <% }); %>
+    <% } %> 
+    <% if (imageExists) { %>
+        <% console.log(imgPath) %>
+        <img src="<%= imgPath %>" alt="item-image" id="img">
+        <a href="<%= item.url %>/image">
+            <button>Upload Image</button>
+        </a>
+    <% } else { %>
+        <p>No image has been uploaded.</p>
+        <a href="<%= item.url %>/image">
+            <button>Upload Image</button>
+        </a>
+    <% } %>
+    <h1><%= title %></h1>
+    <p>Price (per quantity): <%= item.price %></p>
+    <p>Stock: <%= item.stock %></p>
+    <p>Total price: <%= item.price * item.stock %></p>
+    <p>Categories:</p>
+    <% item.categories.forEach(category => { %>
+        <a href="<%= category.url %>""><%= category.title %></a>
+    <% }) %>
+    <br><br>
+    <a href="<%= item.url %>/update">Edit Item</a>
+    <a href="<%= item.url %>/delete">Delete Item</a>
+</body>
+</html>

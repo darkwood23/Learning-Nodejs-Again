@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Application</title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <h3>Preview:</h3>
+    <% if (imageExists) { %>
+        <img src="<%= imgPath %>" alt="item-image">
+    <% } else { %>
+        <p>No image has been uploaded.</p>
+        <img id="preview" src="" alt="Image Preview" >
+    <% } %>
+    <form action="" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required id="imageInput">
+        <button type="submit">Upload Image</button>
+    </form>
+    <a href="<%= item.url %>">Cancel</a>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const preview = document.getElementById('preview');
+
+        imageInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.src = e.target.result; 
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file); 
+            } else {
+                preview.style.display = 'none'; 
+            }
+        });
+    </script>
+</body>
+</html>
